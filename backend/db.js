@@ -1,5 +1,6 @@
+require('dotenv').config();
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://manishamera1213:X2poNHsGsMaLG3la@cluster0.iemuuvx.mongodb.net/gofood?retryWrites=true&w=majority";
+const uri = process.env.MONGOURI;
 const client = new MongoClient(uri);
 
 async function run() {
