@@ -6,7 +6,7 @@ const { body, validationResult } = require('express-validator');
 
 const bcrpt = require("bcryptjs");
 const jwt=require("jsonwebtoken");
-const jwtSec="€486745896€$@fdhhsgpbkjhYUVYUDTYh"
+const jwtSec = process.env.JWTSCE;
 
 router.post('/creatuser',
     [body('email', 'not a valid email').isEmail(),
