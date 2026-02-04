@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
 const { client } = require('../db');
 const { body, validationResult } = require('express-validator');
 
@@ -29,8 +28,7 @@ router.post('/creatuser',
                 location: req.body.location
             }
             const collection = client.db("gofood").collection("user");
-            const newDocument = new User(data_to_insert);
-            await collection.insertOne(newDocument);
+            await collection.insertOne(data_to_insert);
             res.json({ success: true });
         } catch (error) {
             console.log(error);
@@ -54,13 +52,13 @@ router.post('/loginuser',
             let userData = await collection.findOne({ email });
             if (!userData) {
                 console.log("User not found");
-                res.status(400).json({ message: "Credential does't matched" });
+                return res.status(400).json({ message: "Credential does't matched" });
             }
 
             const compare = await bcrpt.compare(req.body.password, userData.password);
             if (!compare) {
                 console.log("Incorrect password");
-                res.status(400).json({ message: "Credential does't matched" });
+                return res.status(400).json({ message: "Credential does't matched" });
             }
             
             const data={
