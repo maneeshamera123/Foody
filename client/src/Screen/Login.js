@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
@@ -7,7 +7,7 @@ export default function Login() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/loginuser", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/loginuser`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
